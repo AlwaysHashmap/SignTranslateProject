@@ -1,0 +1,5 @@
+Tensorflow
+Keras
+Numpy
+openCV - python
+mediapipe
