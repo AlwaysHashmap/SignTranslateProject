@@ -3,3 +3,4 @@ Keras
 Numpy
 openCV - python
 mediapipe
+matplotlib
