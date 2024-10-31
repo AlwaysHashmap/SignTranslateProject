@@ -30,5 +30,5 @@ if __name__ == '__main__':
 
             if cv2.waitKey(10) & 0xFF == ord('q'):    # End Feed
                 break
-        cap.realse()
+        cap.release()
         cv2.destroyAllWindows()
