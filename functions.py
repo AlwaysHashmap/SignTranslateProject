@@ -49,3 +49,4 @@ def keypoint_value_extraction(results): # If landmark is detected, get the xyz p
     keypoints = np.concatenate([face, pose, left_hand, right_hand]) # Concatenate into one array
 
     return keypoints
+
