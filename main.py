@@ -1,41 +1,61 @@
 from packages import *
 from functions import *
 
+PATH = os.path.join('data')
+actions = np.array(os.listdir(PATH))
+model = load_model('trained_model.h5')
+
+sentence, keypoints, last_prediction, grammar, grammar_result = [], [], [], [], []
+
 if __name__ == '__main__':
-    cap = cv2.VideoCapture(0)                                           # Accessing Webcam
-    with mediapipe_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:     # Access MediaPipe Model
+
+    cap = cv2.VideoCapture(0)
+    with mediapipe.solutions.holistic.Holistic(min_detection_confidence=0.75, min_tracking_confidence=0.75) as holistic:
         while cap.isOpened():
-            ret, frame = cap.read()                                     # Read Feed
 
-            image, results = mediapipe_detection(frame, holistic)       # Start Detection
+            ret, image = cap.read()
+            results = mediapipe_detection(image, holistic)
+            mediapipe_detection_draw_landmarks(image, results)
+            keypoints.append(keypoint_value_extraction(results))
 
-            mediapipe_detection_draw_landmarks(image, results)          # Draw Landmarks
+            if len(keypoints) == 30:
+                # Convert Keypoints list into numpy array
+                keypoints = np.array(keypoints)
 
-            cv2.imshow('Input Sign Language', image)                    # Show Feed
+                # Predict the Keypoints using 'trained_model.h5'
+                prediction = model.predict(keypoints[np.newaxis, :, :])
 
-            if cv2.waitKey(10) & 0xFF == ord('q'):                      # End Feed
+                # Clear Keypoints list for the next set of frames
+                keypoints = []
+
+                # Check if the maximum prediction value is above 0.9
+                if np.amax(prediction) > 0.85:
+                    # Check if the predicted sign is different from the previously predicted sign (Prevents Double prediction and possible loop)
+                    if last_prediction != actions[np.argmax(prediction)]:
+                        # Append the predicted word to the sentence list
+                        sentence.append(actions[np.argmax(prediction)])
+                        # last prediction -> latest prediction for the next prediction
+                        last_prediction = actions[np.argmax(prediction)]
+
+            # 'Spacebar' to reset
+            if keyboard.is_pressed(' '):
+                sentence, keypoints, last_prediction, grammar, grammar_result = [], [], [], [], []
+
+            if cv2.waitKey(10) & 0xFF == ord('q'):
                 break
+
+            textsize = cv2.getTextSize(' '.join(sentence), cv2.FONT_HERSHEY_SIMPLEX, 1, 2)[0]
+            text_X_coord = (image.shape[1] - textsize[0]) // 2
+            image = myPutText(image, ' '.join(sentence), (text_X_coord, 430), 25, (255, 255, 255))
+
+            cv2.imshow('Camera', image)
+            print(sentence)
+            cv2.waitKey(1)
+
+            if cv2.getWindowProperty('Camera', cv2.WND_PROP_VISIBLE) < 1:
+                break
+
+        # Release the camera and close all windows
         cap.release()
         cv2.destroyAllWindows()
 
-
-# Problem 1
-# There is not problem recognizing words, however there is a problem with sentences.
-# We need to figure out a way to detected multiple words in sentence however this is
-# impossible in the current program as it only detects single words.
-
-# One of the solutions is to record the video instead and use Dynamic Time warping.
-# However, I feel like this will greatly increase the calculation time and be slow.
-
-# The Second option is to record the video and use Loop Frame Windows.
-# For instance, we can analyze every 30 seconds before moving forward and detect
-# any signs. If the sign is detected and moved forward until the next sign is detected
-# we can split the videos into different frames and kinda move on to the next word.
-# This will increase the calculation time by alot so we need to find a viable function
-# to keep the time complexity low.
-
-# Another solution would be using Motion thresholding with keypoints.
-# We could set up a motion threshold where if a movement gradually slows down or stops
-# we can detect and conclude that a word in Sing language has completed and kinda
-# isolate the sentence. This approach will be easier for LSTM to distinguish between
-# individual signs.
