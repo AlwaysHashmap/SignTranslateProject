@@ -2,7 +2,11 @@ from packages import *
 from functions import *
 
 PATH = os.path.join('data')
-actions = np.array(['hello', 'thanks', '고민', '뻔뻔'])
+#actions = np.array(['hello', 'thanks', 'no_action','고민', '뻔뻔'])
+actions = np.array(['hello'])
+#actions = np.array(['thanks'])
+#actions = np.array(['고민'])
+# actions = np.array(['뻔뻔'])
 sequences = 30
 frames = 30
 

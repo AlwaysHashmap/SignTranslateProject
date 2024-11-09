@@ -28,7 +28,7 @@ if __name__ == '__main__':
                 # Clear Keypoints list for the next set of frames
                 keypoints = []
 
-                # Check if the maximum prediction value is above 0.9
+                # Check if the maximum prediction value is above 0.85
                 if np.amax(prediction) > 0.85:
                     # Check if the predicted sign is different from the previously predicted sign (Prevents Double prediction and possible loop)
                     if last_prediction != actions[np.argmax(prediction)]:
@@ -36,6 +36,13 @@ if __name__ == '__main__':
                         sentence.append(actions[np.argmax(prediction)])
                         # last prediction -> latest prediction for the next prediction
                         last_prediction = actions[np.argmax(prediction)]
+                # else:
+                #     print("nothing")
+                #     if last_prediction != "nothing":
+                #         # Append the predicted word to the sentence list
+                #         sentence.append("nothing")
+                #         # last prediction -> latest prediction for the next prediction
+                #         last_prediction = "nothing"
 
             # 'Spacebar' to reset
             if keyboard.is_pressed(' '):
@@ -49,13 +56,12 @@ if __name__ == '__main__':
             image = myPutText(image, ' '.join(sentence), (text_X_coord, 430), 25, (255, 255, 255))
 
             cv2.imshow('Camera', image)
-            print(sentence)
+
             cv2.waitKey(1)
 
             if cv2.getWindowProperty('Camera', cv2.WND_PROP_VISIBLE) < 1:
                 break
 
-        # Release the camera and close all windows
         cap.release()
         cv2.destroyAllWindows()
 
