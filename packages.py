@@ -18,10 +18,12 @@ from sklearn import metrics
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
 
+import openai
+from groq import Groq
 
 
 mediapipe_holistic = mediapipe.solutions.holistic       # MediaPipe Holistic Model (Detecting)
 mediapipe_drawing = mediapipe.solutions.drawing_utils   # MediaPipe Drawing Utilities (Drawing)
 
 __all__ = ['cv2', 'np', 'os', 'tf', 'plt', 'time','mediapipe', 'string', 'keyboard', 'mediapipe_holistic', 'mediapipe_drawing', 'load_model',
-           'train_test_split', 'to_categorical', 'product', 'metrics', 'Sequential', 'LSTM', 'Dense', 'ImageFont', 'ImageDraw', 'Image']
+           'train_test_split', 'to_categorical', 'product', 'metrics', 'Sequential', 'LSTM', 'Dense', 'ImageFont', 'ImageDraw', 'Image', 'openai', 'Groq']

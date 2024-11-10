@@ -2,12 +2,18 @@ from packages import *
 from functions import *
 
 PATH = os.path.join('data')
-#actions = np.array(['hello', 'thanks', 'no_action','고민', '뻔뻔'])
-actions = np.array(['hello'])
-#actions = np.array(['thanks'])
-#actions = np.array(['고민'])
-# actions = np.array(['뻔뻔'])
-sequences = 30
+#actions = np.array(['화장실', '고민', '어디', '있다'])
+# ['감기', '감사합니다', '고열', '구내염', '귀', '근육통', '눈', '다리', '두드러기', '두통', '등', '따끔거리다', '멍들다', '목', '몸',
+# '몸살', '무릎', '물다', '발목', '부러지다', '붕대', '뼈', '사마귀', '설사', '소화불량', '손',
+# '아프다', '안녕하세요', '어깨', '어지럽다', '얼굴', '열', '의사', '자주', '찰과상', '코로나',
+# '토하다', '피', '피부', '허리', '호흡곤란', '화상']
+#actions = np.array(['머리'])
+# actions = np.array(['아프다'])
+#actions = np.array(['열'])
+
+# 머리 아프다. 열 있다.
+# 
+sequences = 50
 frames = 30
 
 if __name__ == '__main__':
