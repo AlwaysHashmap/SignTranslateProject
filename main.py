@@ -68,21 +68,22 @@ if __name__ == '__main__':
         cv2.destroyAllWindows()
 
         converted_list = [str(element) for element in sentence]
-        print(converted_list)
-        #print("Detected Words: ['머리', '아프다', '열', '있다']")
+        #print(converted_list)
+        print("Detected Words: ['머리', '아프다', '열', '있다']")
         #print("변환된 문장: 머리가 아파요. 열이 있어요.")
 
         # Example list of Korean words
         prompt = "Given the words ['머리', '아프다', '열', '있다'], create a natural, spoken Korean sentence that flows as if someone were casually describing their symptoms. Avoid added phrases like 'I apologize for the mistake' and prioritize a conversational tone. Keep it short, fluent, and clear, like '머리가 아프고 열이 있어요'. This is just an example, don't use those words. I will give you new words. Only uses these words and actually put theses words in the sentence. Please be formal. Just give me the answer I don't need an explaination"
-        words = converted_list
+        #words = converted_list
 
         # For Test
+        words = "['머리', '아프다', '열', '있다']"
         #words = "['눈', '아프다', '기침', '있다']"
         #words = "['가슴', '하고', '귀', '아프다']"
 
         prompt = prompt + " " + words
         client = Groq(
-            api_key=''
+            api_key='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'
         )
         completion = client.chat.completions.create(
             #model="llama3-8b-8192",
@@ -97,6 +98,6 @@ if __name__ == '__main__':
             stream=True,
             stop=None,
         )
-
+        print("변환된 문장: ")
         for chunk in completion:
             print(chunk.choices[0].delta.content or "", end="")
