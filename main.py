@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
         prompt = prompt + " " + words
         client = Groq(
-            api_key='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'
+            api_key=''
         )
         completion = client.chat.completions.create(
             #model="llama3-8b-8192",
