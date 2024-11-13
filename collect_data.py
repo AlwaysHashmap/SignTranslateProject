@@ -9,7 +9,7 @@ PATH = os.path.join('data')
 # '토하다', '피', '피부', '허리', '호흡곤란', '화상']
 #actions = np.array(['머리'])
 # actions = np.array(['아프다'])
-#actions = np.array(['열'])
+actions = np.array(['열'])
 
 # 머리 아프다. 열 있다.
 # 
