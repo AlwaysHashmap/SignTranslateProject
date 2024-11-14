@@ -30,11 +30,11 @@ def keypoint_value_extraction(results):
     #     face = np.array([[res.x, res.y, res.z] for res in results.face_landmarks.landmark]).flatten()     # Flatten into 1-D array
     # else:
     #     face = np.zeros(468 * 3)  # Fill with zeros if no face detected
-    #
-    # if results.pose_landmarks:
-    #     pose = np.array([[res.x, res.y, res.z, res.visibility] for res in results.pose_landmarks.landmark]).flatten()     # Flatten into 1-D array
-    # else:
-    #     pose = np.zeros(33 * 4)  # Fill with zeros if no pose detected
+
+    if results.pose_landmarks:
+        pose = np.array([[res.x, res.y, res.z, res.visibility] for res in results.pose_landmarks.landmark]).flatten()     # Flatten into 1-D array
+    else:
+        pose = np.zeros(33 * 4)  # Fill with zeros if no pose detected
 
     if results.left_hand_landmarks:
         left_hand = np.array([[res.x, res.y, res.z] for res in results.left_hand_landmarks.landmark]).flatten()     # Flatten into 1-D array
@@ -47,7 +47,7 @@ def keypoint_value_extraction(results):
         right_hand = np.zeros(21 * 3)  # Fill with zeros if no right hand detected
 
     #keypoints = np.concatenate([face, pose, left_hand, right_hand]) # Concatenate into one array
-    keypoints = np.concatenate([left_hand, right_hand])  # Concatenate into one array
+    keypoints = np.concatenate([pose, left_hand, right_hand])  # Concatenate into one array
     return keypoints
 
 def myPutText(src, text, pos, font_size, font_color) :
