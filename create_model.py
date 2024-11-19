@@ -11,7 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-PATH = os.path.join('data')
+PATH = os.path.join('collected_data/data')
 actions = np.array(os.listdir(PATH))
 sequences = 30
 frames = 30

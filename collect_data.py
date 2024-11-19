@@ -1,7 +1,7 @@
 from packages import *
 from functions import *
 
-PATH = os.path.join('data')
+PATH = os.path.join('collected_data/data')
 #actions = np.array(['화장실', '고민', '어디', '있다'])
 # ['감기', '감사합니다', '고열', '구내염', '귀', '근육통', '눈', '다리', '두드러기', '두통', '등', '따끔거리다', '멍들다', '목', '몸',
 # '몸살', '무릎', '물다', '발목', '부러지다', '붕대', '뼈', '사마귀', '설사', '소화불량', '손',

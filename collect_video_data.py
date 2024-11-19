@@ -1,7 +1,7 @@
 from packages import *
 from functions import *
 
-PATH = os.path.join('text2avatarData')
+PATH = os.path.join('collected_data/text2avatarData')
 #actions = np.array(['고민', '뻔뻔', '수어'])
 #actions = np.array(['고민', '뻔뻔'])
 actions = np.array(['Idle'])

@@ -1,7 +1,7 @@
 from packages import *
 from functions import *
 
-PATH = os.path.join('data')
+PATH = os.path.join('collected_data/data')
 actions = np.array(os.listdir(PATH))
 model = load_model('trained_model.h5')
 

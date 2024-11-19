@@ -4,7 +4,7 @@ from functions import *
 word_list = ['뻔뻔', '고민']
 
 # Paths for the words
-base_path = 'text2avatarData'
+base_path = 'collected_data/text2avatarData'
 idle_path = os.path.join(base_path, 'Idle')
 
 # Load 'Idle' Frames
