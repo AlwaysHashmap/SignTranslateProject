@@ -2,18 +2,12 @@ from packages import *
 from functions import *
 
 PATH = os.path.join('text2avatarData')
-#actions = np.array(['화장실', '고민', '어디', '있다'])
-# ['감기', '감사합니다', '고열', '구내염', '귀', '근육통', '눈', '다리', '두드러기', '두통', '등', '따끔거리다', '멍들다', '목', '몸',
-# '몸살', '무릎', '물다', '발목', '부러지다', '붕대', '뼈', '사마귀', '설사', '소화불량', '손',
-# '아프다', '안녕하세요', '어깨', '어지럽다', '얼굴', '열', '의사', '자주', '찰과상', '코로나',
-# '토하다', '피', '피부', '허리', '호흡곤란', '화상']
-#actions = np.array(['머리'])
-# actions = np.array(['아프다'])
-actions = np.array(['열'])
+#actions = np.array(['고민', '뻔뻔', '수어'])
+#actions = np.array(['고민', '뻔뻔'])
+actions = np.array(['Idle'])
 
-# 머리 아프다. 열 있다.
-#
-sequences = 50
+sequences = 10
+video_folder = 'edited_video'
 
 if __name__ == '__main__':
     # Create 'text2avatarData' directory structure
@@ -23,31 +17,49 @@ if __name__ == '__main__':
         except FileExistsError:
             pass
 
-    cap = cv2.VideoCapture('video1.mp4')
+    for action in actions:
+        video_path = os.path.join(video_folder, f"{action}.mp4")  # Video file path for each action
 
-    frame_index = 0
-    with mediapipe.solutions.holistic.Holistic(min_detection_confidence=0.75, min_tracking_confidence=0.75) as holistic:
-        while True:
-            ret, image = cap.read()
+        # Check if video file exists
+        if not os.path.isfile(video_path):
+            print(f"Video file for action '{action}' not found.")
+            continue
 
-            # Break the loop if the video ends
-            if not ret:
-                print("End of video reached.")
-                break
+        cap = cv2.VideoCapture(video_path)
+        frame_index = 0
 
-            results = mediapipe_detection(image, holistic)
-            mediapipe_detection_draw_landmarks(image, results)
+        with mediapipe.solutions.holistic.Holistic(min_detection_confidence=0.75, min_tracking_confidence=0.75) as holistic:
+            while True:
+                ret, image = cap.read()
+                if not ret:
+                    print(f"End of video for action '{action}' reached.")
+                    break
 
-            cv2.imshow('Camera', image)
-            if cv2.waitKey(10) & 0xFF == ord('q'):
-                break
+                # Process the image and extract landmarks
+                results = mediapipe_detection(image, holistic)
+                mediapipe_detection_draw_landmarks(image, results)
 
-            # Extract landmarks and save to .npy files
-            keypoints = keypoint_value_extraction(results)
-            frame_path = os.path.join(PATH, actions[0], str(frame_index // sequences), str(frame_index % sequences))
-            np.save(frame_path, keypoints)
+                # Display the frame with landmarks
+                cv2.imshow('Camera', image)
+                if cv2.waitKey(10) & 0xFF == ord('q'):
+                    break
 
-            frame_index += 1
+                # Save keypoints to the appropriate action/sequence directory
+                sequence_index = frame_index // sequences
+                frame_number = frame_index % sequences
+                frame_path = os.path.join(PATH, action, str(sequence_index), f"{frame_number}.npy")
+                keypoints = keypoint_value_extraction(results)
+                np.save(frame_path, keypoints)
 
-    cap.release()
-    cv2.destroyAllWindows()
+                frame_index += 1
+
+        cap.release()
+        cv2.destroyAllWindows()
+
+    print("Processing completed for all videos.")
+
+    # Deleting Empty Sequences
+    for root, dirs, files in os.walk(PATH, topdown=False):  # topdown=False allows us to delete subfolders first
+        # Check if a directory is empty (no files and no subdirectories)
+        if not dirs and not files:
+            os.rmdir(root)  # Remove the empty directory

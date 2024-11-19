@@ -56,3 +56,24 @@ def myPutText(src, text, pos, font_size, font_color) :
     font = ImageFont.truetype('fonts/gulim.ttc', font_size)
     draw.text(pos, text, font=font, fill= font_color)
     return np.array(img_pil)
+
+def interpolate_keypoints(keypoints1, keypoints2, num_transition_frames):
+    # Smoothly transition between two sets of keypoints over a number of frames.
+    transition_frames = []
+    for t in range(1, num_transition_frames + 1):
+        alpha = t / (num_transition_frames + 1)  # Interpolation factor
+        interpolated_keypoints = keypoints1 * (1 - alpha) + keypoints2 * alpha
+        transition_frames.append(interpolated_keypoints)
+    return transition_frames
+
+def load_word_data(word_path):
+    # Load all sequences and frames for a word.
+    all_frames = []
+    for sequence in sorted(os.listdir(word_path), key=lambda x: int(x)):
+        sequence_path = os.path.join(word_path, sequence)
+        if not os.path.isdir(sequence_path):
+            continue
+        for frame_file in sorted(os.listdir(sequence_path), key=lambda x: int(x.split('.')[0])):
+            frame_path = os.path.join(sequence_path, frame_file)
+            all_frames.append(np.load(frame_path))
+    return all_frames
