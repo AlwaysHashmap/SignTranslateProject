@@ -28,8 +28,8 @@ if __name__ == '__main__':
                 # Clear Keypoints list for the next set of frames
                 keypoints = []
 
-                #print(np.amax(prediction))
-                #print(actions[np.argmax(prediction)])
+                print(np.amax(prediction))
+                print(actions[np.argmax(prediction)])
                 # Check if the maximum prediction value is above 0.85
                 #if np.amax(prediction) > 0.15 and np.amax(prediction) < 0.35:
                     # Check if the predicted sign is different from the previously predicted sign (Prevents Double prediction and possible loop)
@@ -88,7 +88,7 @@ if __name__ == '__main__':
         completion = client.chat.completions.create(
             #model="llama3-8b-8192",
             #model="gemma2-9b-it",
-            model="llama-3.2-90b-text-preview",
+            model="llama-3.1-70b-versatile",
             messages=[
                 {"role": "user", "content": prompt}
             ],

@@ -13,7 +13,7 @@ import seaborn as sns
 
 PATH = os.path.join('collected_data/data')
 actions = np.array(os.listdir(PATH))
-sequences = 30
+sequences = 50
 frames = 30
 
 # {'action[0]' : 0, 'action[1]' : 1}
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     model.add(Dense(actions.shape[0], activation='softmax'))
 
     # Compile with a lower learning rate
-    model.compile(optimizer=Adam(learning_rate=1e-6), loss='categorical_crossentropy', metrics=['categorical_accuracy'])
+    model.compile(optimizer=Adam(learning_rate=1e-4), loss='categorical_crossentropy', metrics=['categorical_accuracy'])
 
     # Train with validation split to monitor progress
     history = model.fit(X_train, Y_train, epochs=1820)
