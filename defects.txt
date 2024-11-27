@@ -1,0 +1,4 @@
+training1.zip
+
+part0 = 1501 ~ 1549
+defect = 1550_D
