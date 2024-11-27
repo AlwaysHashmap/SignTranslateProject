@@ -1,4 +1,51 @@
-training1.zip
+Test/시운전용
 
-part0 = 1501 ~ 1549
-defect = 1550_D
+"어디"
+"화장실"
+"있어요"
+
+"머리"
+"아파요"
+"열"
+
+
+=============================================================================
+training1.zip (PERSON1 1501 ~ 3000)
+
+01_real_word_video.zip.part0 = 1501 ~ 1549
+defect = 1550_D (added person2's)
+
+01_real_word_video.zip.part1073741824 = 1550 ~ 1599(4개)
+defect = 1599_U (added person2's)
+
+01_real_word_video.zip.part2147483648 = 1600 ~ 1641
+defect = 1642_D (added person2's)
+
+01_real_word_video.zip.part3221225472 = 1642(4개) ~ 1683(1개)
+defect = 1683_F (added person2's)
+
+01_real_word_video.zip.part4294967296 = 1683(3개) ~ 1725(2개)
+defect = 1725_L (added person2's)
+=============================================================================
+training2.zip (PERSON1 0000 ~ 1500)
+=============================================================================
+training3.zip (PERSON2 1501 ~ 3000)
+
+03_real_word_video.zip.part0 = 1501 ~ 1554(2개)
+defects = 1554_L (added person1's)
+
+03_real_word_video.zip.part1073741824 = 1554(2개) ~ 1607(2개)
+defects = 1607_L (added person1's)
+
+03_real_word_video.zip.part2147483648 = 1607(2개) ~ 1654(2개)
+defects = 1654_L (added person1's)
+
+03_real_word_video.zip.part3221225472 = 1654(2개) ~ 1702(3개)
+defects = 1702_R (added person1's)
+
+03_real_word_video.zip.part4294967296 = 1702(1개) ~ 1751(3개)
+defects = 1751_R
+
+=============================================================================
+training4.zip
+=============================================================================

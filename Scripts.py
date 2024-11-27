@@ -127,4 +127,4 @@ def rename_move_videos_to_training_and_validation_folders():
 if __name__ == '__main__':
     #convert_jsonfile_sign_language_words_to_output_txt()
     #create_empty_folder_per_word_for_training_and_validation_video_data()
-    rename_move_videos_to_training_and_validation_folders()
+    #rename_move_videos_to_training_and_validation_folders()
