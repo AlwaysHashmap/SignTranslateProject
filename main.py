@@ -3,7 +3,7 @@ from functions import *
 
 PATH = os.path.join('collected_data/data')
 actions = np.array(os.listdir(PATH))
-model = load_model('trained_model.h5')
+model = load_model('test_trained_model.h5')
 
 sentence, keypoints, last_prediction = [], [], []
 
@@ -31,20 +31,13 @@ if __name__ == '__main__':
                 print(np.amax(prediction))
                 print(actions[np.argmax(prediction)])
                 # Check if the maximum prediction value is above 0.85
-                #if np.amax(prediction) > 0.15 and np.amax(prediction) < 0.35:
+                if np.amax(prediction) > 0.15 and np.amax(prediction) < 0.35:
                     # Check if the predicted sign is different from the previously predicted sign (Prevents Double prediction and possible loop)
-                if last_prediction != actions[np.argmax(prediction)]:
-                        # Append the predicted word to the sentence list
-                    sentence.append(actions[np.argmax(prediction)])
-                        # last prediction -> latest prediction for the next prediction
-                    last_prediction = actions[np.argmax(prediction)]
-                # else:
-                #     print("nothing")
-                #     if last_prediction != "nothing":
-                #         # Append the predicted word to the sentence list
-                #         sentence.append("nothing")
-                #         # last prediction -> latest prediction for the next prediction
-                #         last_prediction = "nothing"
+                    if last_prediction != actions[np.argmax(prediction)]:
+                            # Append the predicted word to the sentence list
+                        sentence.append(actions[np.argmax(prediction)])
+                            # last prediction -> latest prediction for the next prediction
+                        last_prediction = actions[np.argmax(prediction)]
 
             # 'Spacebar' to reset
             if keyboard.is_pressed(' '):
@@ -69,8 +62,6 @@ if __name__ == '__main__':
 
         converted_list = [str(element) for element in sentence]
         #print(converted_list)
-        print("Detected Words: ['머리', '아프다', '열', '있다']")
-        #print("변환된 문장: 머리가 아파요. 열이 있어요.")
 
         # Example list of Korean words
         prompt = "Given the words ['머리', '아프다', '열', '있다'], create a natural, spoken Korean sentence that flows as if someone were casually describing their symptoms. Avoid added phrases like 'I apologize for the mistake' and prioritize a conversational tone. Keep it short, fluent, and clear, like '머리가 아프고 열이 있어요'. This is just an example, don't use those words. I will give you new words. Only uses these words and actually put theses words in the sentence. Please be formal. Just give me the answer I don't need an explaination"
@@ -78,10 +69,10 @@ if __name__ == '__main__':
 
         # For Test
         words = "['머리', '아프다', '열', '있다']"
-        #words = "['눈', '아프다', '기침', '있다']"
-        #words = "['가슴', '하고', '귀', '아프다']"
 
+        # Change words -> converted_list for actual change
         prompt = prompt + " " + words
+
         client = Groq(
             api_key=''
         )

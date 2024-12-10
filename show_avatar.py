@@ -1,7 +1,42 @@
 from packages import *
 from functions import *
 
-word_list = ['뻔뻔', '고민']
+# Example list of Korean words
+prompt = (
+    "Given the sentence '의사가 공원에 대해서 알려드릴겁니다', create a natural Korean word array "
+    "by extracting only meaningful words without including unnecessary particles, suffixes, or endings. "
+    "Focus only on key concepts or actions. Ensure the result is ['의사', '공원', '알려주다']. "
+    "Provide only the array as output, without any additional explanations or formatting."
+)
+#words = converted_list
+
+# For Test
+words = "간호사가 입원에 대해서 알려드릴겁니다"
+
+# Change words -> converted_list for actual change
+prompt = prompt + " " + words
+
+client = Groq(
+    api_key=''
+)
+completion = client.chat.completions.create(
+    #model="llama3-8b-8192",
+    #model="gemma2-9b-it",
+    model="llama-3.1-70b-versatile",
+    messages=[
+        {"role": "user", "content": prompt}
+    ],
+    temperature=1,
+    max_tokens=1024,
+    top_p=1,
+    stream=True,
+    stop=None,
+)
+print("변환된 단어: ")
+for chunk in completion:
+    print(chunk.choices[0].delta.content or "", end="")
+
+word_list = ['간호사','입원', '알려주다']
 
 # Paths for the words
 base_path = 'collected_data/text2avatarData'
@@ -24,7 +59,7 @@ for word in word_list:
     word_frames = load_word_data(word_path)
 
     # Debug: Print frame counts
-    print(f"Number of frames for {word}: {len(word_frames)}")
+    print(f"\nNumber of frames for {word}: {len(word_frames)}")
 
     # Create transition from previous word to the current word
     transition_frames = interpolate_keypoints(previous_frames[-1], word_frames[0], num_transition_frames)
@@ -99,3 +134,4 @@ if __name__ == '__main__':
             break
 
     cv2.destroyAllWindows()
+
