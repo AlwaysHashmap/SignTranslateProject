@@ -1,94 +1,124 @@
+import os
+import numpy as np
+import cv2
+import mediapipe as mp
+from tensorflow.keras.models import load_model
+
+# Local helper modules
 from packages import *
-from functions import *
+from functions import (mediapipe_detection, keypoint_value_extraction, extract_words_from_output_textfile)
 
-PATH = os.path.join('collected_data/data')
-actions = np.array(os.listdir(PATH))
-model = load_model('test_trained_model.h5')
+MODEL_PATH = "SL_Best_Model.keras"
+GLOBAL_MIN_PATH = "global_min.npy"
+GLOBAL_MAX_PATH = "global_max.npy"
+ACTIONS_TXT = "Sign_Language_Words.txt"
 
-sentence, keypoints, last_prediction = [], [], []
+FRAMES_PER_SEQUENCE = 30
+FEATURE_DIM = 1662  # Must match the new dimension with face
 
-if __name__ == '__main__':
+MIN_DETECTION_CONF = 0.75
+MIN_TRACKING_CONF = 0.75
 
+# Frame-to-frame movement threshold
+MOVEMENT_THRESHOLD = 0.10  # if you see random triggers, try 0.02 or 0.03
+# Total-sequence movement threshold
+SEQUENCE_MOVEMENT_THRESHOLD = 0.70  # if your movement is subtle, reduce this
+
+def main():
+    # Load model
+    model = load_model(MODEL_PATH)
+    print(f"Loaded model from: {MODEL_PATH}")
+
+    # Load global_min, global_max
+    if not (os.path.exists(GLOBAL_MIN_PATH) and os.path.exists(GLOBAL_MAX_PATH)):
+        print("[ERROR] Missing global_min.npy or global_max.npy.")
+        return
+    global_min = np.load(GLOBAL_MIN_PATH)
+    global_max = np.load(GLOBAL_MAX_PATH)
+    print("Loaded global_min and global_max.")
+
+    # Load actions (class labels)
+    actions = extract_words_from_output_textfile(ACTIONS_TXT)
+    print(f"Actions ({len(actions)}): {actions}")
+
+    # Initialize Mediapipe Holistic
+    mp_holistic = mp.solutions.holistic
+    holistic = mp_holistic.Holistic(
+        min_detection_confidence=MIN_DETECTION_CONF,
+        min_tracking_confidence=MIN_TRACKING_CONF
+    )
+
+    # Start webcam
     cap = cv2.VideoCapture(0)
-    with mediapipe.solutions.holistic.Holistic(min_detection_confidence=0.75, min_tracking_confidence=0.75) as holistic:
-        while cap.isOpened():
+    frame_buffer = []
+    prev_keypoints = None  # to compare with current frame for gating
 
-            ret, image = cap.read()
-            results = mediapipe_detection(image, holistic)
-            mediapipe_detection_draw_landmarks(image, results)
-            keypoints.append(keypoint_value_extraction(results))
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            print("Empty camera frame. Exiting...")
+            break
 
-            if len(keypoints) == 30:
-                # Convert Keypoints list into numpy array
-                keypoints = np.array(keypoints)
+        # Mediapipe detection
+        results = mediapipe_detection(frame, holistic)
+        keypoints = keypoint_value_extraction(results)
 
-                # Predict the Keypoints using 'trained_model.h5'
-                prediction = model.predict(keypoints[np.newaxis, :, :])
+        # If shape is (1, 258), squeeze
+        if keypoints.shape == (1, FEATURE_DIM):
+            keypoints = np.squeeze(keypoints, axis=0)
 
-                # Clear Keypoints list for the next set of frames
-                keypoints = []
+        if keypoints.shape != (FEATURE_DIM,):
+            print(f"[WARNING] Keypoints shape {keypoints.shape} != ({FEATURE_DIM},). Skipping.")
+            prev_keypoints = None
+            continue
 
-                print(np.amax(prediction))
-                print(actions[np.argmax(prediction)])
-                # Check if the maximum prediction value is above 0.85
-                if np.amax(prediction) > 0.15 and np.amax(prediction) < 0.35:
-                    # Check if the predicted sign is different from the previously predicted sign (Prevents Double prediction and possible loop)
-                    if last_prediction != actions[np.argmax(prediction)]:
-                            # Append the predicted word to the sentence list
-                        sentence.append(actions[np.argmax(prediction)])
-                            # last prediction -> latest prediction for the next prediction
-                        last_prediction = actions[np.argmax(prediction)]
+        if prev_keypoints is not None:
+            dist = np.linalg.norm(keypoints - prev_keypoints)
+            if dist > MOVEMENT_THRESHOLD:
+                frame_buffer.append(keypoints)
+            else:
+                # Skip if No significant movement
+                pass
+        else:
+            pass
 
-            # 'Spacebar' to reset
-            if keyboard.is_pressed(' '):
-                sentence, keypoints, last_prediction, grammar, grammar_result = [], [], [], [], []
+        prev_keypoints = keypoints
 
-            if cv2.waitKey(10) & 0xFF == ord('q'):
-                break
+        if len(frame_buffer) == FRAMES_PER_SEQUENCE:
+            seq_array = np.array(frame_buffer)  # shape (30, 258)
 
-            textsize = cv2.getTextSize(' '.join(sentence), cv2.FONT_HERSHEY_SIMPLEX, 1, 2)[0]
-            text_X_coord = (image.shape[1] - textsize[0]) // 2
-            image = myPutText(image, ' '.join(sentence), (text_X_coord, 430), 25, (255, 255, 255))
+            total_movement = 0.0
+            for i in range(1, len(seq_array)):
+                total_movement += np.linalg.norm(seq_array[i] - seq_array[i-1])
 
-            cv2.imshow('Camera', image)
+            if total_movement < SEQUENCE_MOVEMENT_THRESHOLD:
+                # Very little overall movement => skip classification
+                print(f"No movement, skipping classification (total movement: {total_movement:.2f})")
+                frame_buffer = []
+                continue
 
-            cv2.waitKey(1)
+            gm = global_min.reshape(1, FEATURE_DIM)
+            gM = global_max.reshape(1, FEATURE_DIM)
+            seq_array = (seq_array - gm) / (gM - gm + 1e-8)
 
-            if cv2.getWindowProperty('Camera', cv2.WND_PROP_VISIBLE) < 1:
-                break
+            seq_array = seq_array[np.newaxis, ...]  # (1, 30, 258)
+            predictions = model.predict(seq_array)
+            pred_idx = np.argmax(predictions[0])
+            pred_action = actions[pred_idx]
+            confidence = predictions[0][pred_idx]
 
-        cap.release()
-        cv2.destroyAllWindows()
+            print(f"Predicted: {pred_action} (conf: {confidence:.2f})")
 
-        converted_list = [str(element) for element in sentence]
-        #print(converted_list)
+            frame_buffer = []
 
-        # Example list of Korean words
-        prompt = "Given the words ['머리', '아프다', '열', '있다'], create a natural, spoken Korean sentence that flows as if someone were casually describing their symptoms. Avoid added phrases like 'I apologize for the mistake' and prioritize a conversational tone. Keep it short, fluent, and clear, like '머리가 아프고 열이 있어요'. This is just an example, don't use those words. I will give you new words. Only uses these words and actually put theses words in the sentence. Please be formal. Just give me the answer I don't need an explaination"
-        #words = converted_list
+        cv2.imshow('Camera Feed', frame)
+        if cv2.waitKey(5) & 0xFF == ord('q'):
+            break
 
-        # For Test
-        words = "['머리', '아프다', '열', '있다']"
+    cap.release()
+    cv2.destroyAllWindows()
+    holistic.close()
+    print("Exiting Main.")
 
-        # Change words -> converted_list for actual change
-        prompt = prompt + " " + words
-
-        client = Groq(
-            api_key=''
-        )
-        completion = client.chat.completions.create(
-            #model="llama3-8b-8192",
-            #model="gemma2-9b-it",
-            model="llama-3.1-70b-versatile",
-            messages=[
-                {"role": "user", "content": prompt}
-            ],
-            temperature=1,
-            max_tokens=1024,
-            top_p=1,
-            stream=True,
-            stop=None,
-        )
-        print("변환된 문장: ")
-        for chunk in completion:
-            print(chunk.choices[0].delta.content or "", end="")
+if __name__ == "__main__":
+    main()

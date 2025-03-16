@@ -1,12 +1,14 @@
 Test/시운전용
 
-"어디"
-"화장실"
-"있어요"
+"감기"
+"다리"
+"변비"
+
 
 "머리"
-"아파요"
-"열"
+"아프다"
+"눈"
+"귀"
 
 
 =============================================================================
@@ -107,8 +109,102 @@ defects = NONE
 
 =============================================================================
 training2.zip (PERSON1 0000 ~ 1500)
+
+02_real_word_video.zip.part0 = 0001 ~ 0048(4개)
+defects = 0048_U
+
+02_real_word_video.zip.part1073741824 = 0049(5개) ~ 0096(1개)
+defects = 0096_F
+
+02_real_word_video.zip.part2147483648 = 0096(3개) ~ 0145(2개)
+defects = 0145_L
+
+02_real_word_video.zip.part3221225472 = 0145(2개) ~ 0193(2개)
+defects = 0193_L
+
+02_real_word_video.zip.part4294967296 = 0193(2개) ~ 0245(1개)
+defects = 0245_F
+
+02_real_word_video.zip.part5368709120 = 0245(3개) ~ 0249(1개)
+defects = 0249_F
+
+02_real_word_video.zip.part6442450944 = 0249(3개) ~ 0346(5개)
+defects = 0347_D
+
+02_real_word_video.zip.part7516192768 = 0347(4개) ~ 0399(1개)
+defects = 0399_F
+
+02_real_word_video.zip.part8589934592 = 0399(3개) ~ 0450(1개)
+defects = 0450_F
+
+02_real_word_video.zip.part9663676416 = 0450(3개) ~ 0500(1개)
+defects = 0500_F
+
+02_real_word_video.zip.part10737418240 = 0500(3개) ~ 0551(1개)
+defects = 0551_F
+
+02_real_word_video.zip.part11811160064 = 0551(3개) ~ 0599(2개)
+defects = 0599_L
+
+02_real_word_video.zip.part12884901888 = 0599(2개) ~ 0645(1개)
+defects = 0645_F
+
+02_real_word_video.zip.part13958643712 = 0645(3개) ~ 0693(1개)
+defects = 0693_F
+
+02_real_word_video.zip.part15032385536 = 0693(3개) ~ 0740(5개)
+defects = 0741_D
+
+02_real_word_video.zip.part16106127360 = 0741(4개) ~ 0790(3개)
+defects = 0790_R
+
+02_real_word_video.zip.part17179869184 = 0790(1개) ~ 0837(5개)
+defects = 0838_D
+
+02_real_word_video.zip.part18253611008 = 0838(4개) ~ 0884
+defects = 0885_D
+
+02_real_word_video.zip.part19327352832 = 0885(4개) ~ 0942(1개)
+defects = 0942_F
+
+02_real_word_video.zip.part20401094656 = 0942(3개) ~ 1003(1개)
+defects = 1003_F
+
+02_real_word_video.zip.part21474836480 = 1003(3개) ~ 1050(2개)
+defects = 1050_L
+
+02_real_word_video.zip.part22548578304 = 1050(2개) ~ 1098(4개)
+defects = 1098_U
+
+02_real_word_video.zip.part23622320128 = 1099(5개) ~ 1147(1개)
+defects = 1147_F
+
+02_real_word_video.zip.part24696061952 = 1147(3개) ~ 1195(1개)
+defects = 1195_F
+
+02_real_word_video.zip.part25769803776 = 1195(3개) ~ 1242(1개)
+defects = 1242_F
+
+02_real_word_video.zip.part26843545600 = 1242(3개) ~ 1289(2개)
+defects = 1289_L
+
+02_real_word_video.zip.part27917287424 = 1289(2개) ~ 1337(4개)
+defects = 1337_U
+
+02_real_word_video.zip.part28991029248 = 1338(5개) ~ 1386(2개)
+defects = 1386_L
+
+02_real_word_video.zip.part30064771072 = 1386(2개) ~ 1434(5개)
+defects = 1435_D
+
+02_real_word_video.zip.part31138512896 = 1435(4개) ~ 1482(1개)
+defects = 1482_F
+
+02_real_word_video.zip.part32212254720 = 1482(3개) ~ 1500
+defects = NONE
+
 =============================================================================
-training3.zip (PERSON2 1501 ~ 3000)
+training3.zip (PERSON2 1501 ~ 2585)
 
 03_real_word_video.zip.part0 = 1501 ~ 1554(2개)
 defects = 1554_L (added person1's)
@@ -143,10 +239,449 @@ defects = 1998_F
 03_real_word_video.zip.part10737418240 = 1998(3개) ~ 2047(1개)
 defects = 2047_F
 
+03_real_word_video.zip.part11811160064 = 2047(3개) ~ 2095(4개)
+defects = 2095_U
 
+02_real_word_video.zip.part12884901888 = 2096(5개) ~ 2144(4개)
+defects = 2144_U
+
+02_real_word_video.zip.part13958643712 = 2145(5개) ~ 2194(4개)
+defects = 2194_U
+
+03_real_word_video.zip.part15032385536 = 2195(5개) ~ 2247(1개)
+defects = 2247_F
+
+03_real_word_video.zip.part16106127360 = 2247(3개) ~ 2297(3개)
+defects = 2297_R
+
+03_real_word_video.zip.part17179869184 = 2297(1개) ~ 2350(5개)
+defects = 2351_D
+
+03_real_word_video.zip.part18253611008 = 2351(4개) ~ 2406(3개)
+defects = 2406_R
+
+03_real_word_video.zip.part19327352832 = 2406(1개) ~ 2451(3개)
+defects = 2451_R
+
+03_real_word_video.zip.part20401094656 = 2451(1개) ~ 2499(5개)
+defects = 2500_D
+
+03_real_word_video.zip.part21474836480 = 2500(4개) ~ 2552(3개)
+defects = 2552_R
+
+03_real_word_video.zip.part22548578304 = 2552(1개) ~ 2585(4개)
+defects = 2585_U
 
 
 
 =============================================================================
-training4.zip
+training4.zip (PERSON2 0001 ~ 1500)
+
+04_real_word_video.zip.part0 = 0001(5개) ~ 0044(1개)
+defects = 0044_F
+
+04_real_word_video.zip.part1073741824 = 0044(3개) ~ 0088(2개)
+defects = 0088_L
+
+04_real_word_video.zip.part2147483648 = 0088(2개) ~ 0136(1개)
+defects = 0136_F
+
+04_real_word_video.zip.part3221225472 = 0136(3개) ~ 0183(3개)
+defects = 0183_R
+
+04_real_word_video.zip.part4294967296 = 0183(1개) ~ 0235(1개)
+defects = 0235_F
+
+04_real_word_video.zip.part5368709120 = 0235(3개) ~ 0284(5개)
+defects = 0285_D
+
+04_real_word_video.zip.part6442450944 = 0285(4개) ~ 0327(4개)
+defects = 0327_U
+
+04_real_word_video.zip.part7516192768 = 0328(5개) ~ 0373(1개)
+defects = 0373_F
+
+04_real_word_video.zip.part8589934592 = 0373(3개) ~ 0424(1개)
+defects = 0424_F
+
+04_real_word_video.zip.part9663676416 = 0242(3개) ~ 0482(5개)
+defects = 0483_D
+
+04_real_word_video.zip.part10737418240 = 0483(4개) ~ 0541(5개)
+defects = 0542_D
+
+04_real_word_video.zip.part11811160064 = 0542(4개) ~ 0595(5개)
+defects = 0596_D
+
+04_real_word_video.zip.part12884901888 = 0596(4개) ~ 0645(1개)
+defects = 0645_F
+
+04_real_word_video.zip.part13958643712 = 0645(3개) ~ 0692(3개)
+defects = 0692_R
+
+04_real_word_video.zip.part15032385536 = 0692(1개) ~ 0740(3개)
+defects = 0740_R
+
+04_real_word_video.zip.part16106127360 = 0740(1개) ~ 0790(1개)
+defects = 0790_F
+
+04_real_word_video.zip.part17179869184 = 0790(3개) ~ 0839(1개)
+defects = 0839_F
+
+04_real_word_video.zip.part18253611008 = 0839(3개) ~ 0887(3개)
+defects = 0887_R
+
+04_real_word_video.zip.part19327352832 = 0887(1개) ~ 0940(1개)
+defects = 0940_F
+
+04_real_word_video.zip.part20401094656 = 0940(3개) ~ 0995(5개)
+defects = 0996_D
+
+04_real_word_video.zip.part21474836480 = 0996(4개) ~ 1044(5개)
+defects = 1045_D
+
+04_real_word_video.zip.part22548578304 = 1045(4개) ~ 1094(2개)
+defects = 1094_L
+
+04_real_word_video.zip.part23622320128 = 1094(2개) ~ 1149(3개)
+defects = 1149_R
+
+04_real_word_video.zip.part24696061952 = 1149(1개) ~ 1203(5개)
+defects = 1204_D
+
+04_real_word_video.zip.part25769803776 = 1204(4개) ~ 1257(4개)
+defects = 1257_U
+
+04_real_word_video.zip.part26843545600 = 1258(5개) ~ 1310(4개)
+defects = 1310_U
+
+04_real_word_video.zip.part27917287424 = 1311(5개) ~ 1364(2개)
+defects = 1364_L
+
+04_real_word_video.zip.part2899102924 = 1364(2개) ~ 1418(3개)
+defects = 1418_R
+
+04_real_word_video.zip.part30064771072 = 1418(1개) ~ 1472(2개)
+defects = (1472_L
+
+04_real_word_video.zip.part31138512896
+defects =
+
 =============================================================================
+validationVideo17_18
+
+PERSON 17
+
+01_real_word_video.zip.part0 = 1501(5개) ~ 1552(3개)
+defects = 1552_R
+
+01_real_word_video.zip.part1073741824 = 1552(1개) ~ 1609(2개)
+defects = 1609_F
+
+01_real_word_video.zip.part2147483648 = 1609(2개) ~ 1657(5개)
+defects = 1658_D
+
+01_real_word_video.zip.part3221225472 = 1658(4개) ~ 1707(5개)
+defects = 1708_D
+
+01_real_word_video.zip.part4294967296 = 1708(4개) ~ 1757(5개)
+defects = 1758_D
+
+01_real_word_video.zip.part5368709120 = 1758(4개) ~ 1807(3개)
+defects = 1807_R
+
+01_real_word_video.zip.part6442450944 = 1807(1개) ~ 1856(1개)
+defects = 1856_F
+
+01_real_word_video.zip.part7516192768 = 1856(3개) ~ 1905(1개)
+defects = 1905_F
+
+01_real_word_video.zip.part8589934592 = 1905(3개) ~ 1952(5개)
+defects = 1953_D
+
+01_real_word_video.zip.part9663676416 = 1953(4개) ~ 2000(1개)
+defects = 2000_F
+
+01_real_word_video.zip.part10737418240 = 2000(3개) ~ 2051(3개)
+defects = 2051_R
+
+01_real_word_video.zip.part11811160064 = 2051(1개) ~ 2102(1개)
+defects = 2102_F
+
+01_real_word_video.zip.part12884901888 = 2102(3개) ~ 2152(4개)
+defects = 2152_U
+
+01_real_word_video.zip.part13958643712 = 2153(5개) ~ 2203(1개)
+defects = 2203_F
+
+01_real_word_video.zip.part15032385536 = 2203(3개) ~ 2256(3개)
+defects = 2256_R
+
+01_real_word_video.zip.part16106127360 = 2256(1개) ~ 2310(4개)
+defects = 2310_U
+
+01_real_word_video.zip.part17179869184 = 2311(5개) ~ 2365(2개)
+defects = 2365_L
+
+01_real_word_video.zip.part18253611008 = 2365(2개) ~ 2419(3개)
+defects = 2419_R
+
+01_real_word_video.zip.part19327352832 = 2419(1개) ~ 2465(5개)
+defects = 2466_D
+
+01_real_word_video.zip.part20401094656 = 2466(4개) ~ 2521(5개)
+defects = 2522_D
+
+01_real_word_video.zip.part21474836480 = 2522(4개) ~ 2574(1개)
+defects = 2574_F
+
+01_real_word_video.zip.part22548578304 = 2574(3개) ~ 2624(5개)
+defects = 2625_D
+
+01_real_word_video.zip.part23622320128 = 2625(4개) ~ 2677(4개)
+defects = 2677_U
+
+01_real_word_video.zip.part24696061952 = 2678(5개) ~ 2727(2개)
+defects = 2727_L
+
+01_real_word_video.zip.part25769803776 = 2727(2개) ~ 2778(1개)
+defects = 2778_F
+
+01_real_word_video.zip.part26843545600 = 2778(3개) ~ 2827(2개)
+defects = 2827_L
+
+01_real_word_video.zip.part27917287424 = 2827(2개) ~ 2879(2개)
+defects = 2879_L
+
+01_real_word_video.zip.part28991029248 = 2879(2개) ~ 2930(4개)
+defects = 2930_U
+
+01_real_word_video.zip.part30064771072 = 2931(5개) ~ 2983(5개)
+defects = 2984_D
+
+01_real_word_video.zip.part31138512896 = 2984(4개) ~ 3000
+defects = NONE
+
+01_real_word_video.zip.part31138512896 = 0001(5개) ~ 0037(1개)
+defects = 0037_F
+
+01_real_word_video.zip.part32212254720 = 0037(3개) ~ 0082(4개)
+defects = 0082_U
+
+01_real_word_video.zip.part33285996544 = 0083(5개) ~ 0134(1개)
+defects = 0134_F
+
+01_real_word_video.zip.part34359738368 = 0134(3개) ~ 0184(2개)
+defects = 0184_L
+
+01_real_word_video.zip.part35433480192 = 0184(2개) ~ 0238(3개)
+defects = 0238_R
+
+01_real_word_video.zip.part36507222016 = 0238(1개) ~ 0289(4개)
+defects = 0289_U
+
+01_real_word_video.zip.part37580963840 = 0290(5개) ~ 0345(4개)
+defects = 0345_U
+
+01_real_word_video.zip.part38654705664 = 0346(5개) ~ 0398(4개)
+defects = 0398_U
+
+01_real_word_video.zip.part39728447488 = 0399(5개) ~ 0453(5개)
+defects = 0454_D
+
+01_real_word_video.zip.part40802189312 = 0454(4개) ~ 0507(5개)
+defects = 0508_D
+
+01_real_word_video.zip.part41875931136 = 0508(4개) ~ 0564(2개)
+defects = 0564_L
+
+01_real_word_video.zip.part42949672960 = 0564(2개) ~ 0621(1개)
+defects = 0621_F
+
+01_real_word_video.zip.part44023414784 = 0621(3개) ~ 0665(4개)
+defects = 0665_U
+
+01_real_word_video.zip.part45097156608 = 0666(5개) ~ 0707(1개)
+defects = 0707_F
+
+01_real_word_video.zip.part46170898432 = 0707(3개) ~ 0748(3개)
+defects = 0748_R
+
+01_real_word_video.zip.part47244640256 = 0748(1개) ~ 0790(5개)
+defects = 0791_D
+
+01_real_word_video.zip.part48318382080 = 0791(4개) ~ 0835(3개)
+defects = 0835_R
+
+01_real_word_video.zip.part49392123904 = 0835(1개) ~ 0883(1개)
+defects = 0883_F
+
+01_real_word_video.zip.part50465865728 = 0883(3개) ~ 0932(5개)
+defects = 0933_D
+
+01_real_word_video.zip.part51539607552 = 0933(4개) ~ 0983(5개)
+defects = 0984_D
+
+01_real_word_video.zip.part52613349376 = 0984(4개) ~ 1033(4개)
+defects = 1033_U
+
+01_real_word_video.zip.part53687091200 = 1034(5개) ~ 1087(5개)
+defects = 1088_D
+
+01_real_word_video.zip.part54760833024 = 1088(4개) ~ 1150(4개)
+defects = 1150_U
+
+01_real_word_video.zip.part55834574848 = 1151(5개) ~ 1210(2개)
+defects = 1210_L
+
+01_real_word_video.zip.part56908316672 = 1210(2개) ~ 1268(1개)
+defects = 1268_F
+
+01_real_word_video.zip.part57982058496 = 1268(3개) ~ 1318(2개)
+defects = 1318_L
+
+01_real_word_video.zip.part59055800320 = 1318(2개) ~ 1366(1개)
+defects = 1366_F
+
+01_real_word_video.zip.part60129542144 = 1366(3개) ~ 1413(4개)
+defects = 1413_U
+
+01_real_word_video.zip.part61203283968 = 1414(5개) ~ 1462(3개)
+defects = 1462_R
+
+01_real_word_video.zip.part62277025792 = 1462(1개) ~ 1500(5개)
+defects = NONE
+
+PERSON 18
+
+01_real_word_video.zip.part62277025792 = 1501(5개) ~ 1514(3개)
+defects = 1514_R
+
+01_real_word_video.zip.part63350767616 = 1514(1개) ~ 1563(1개)
+defects = 1563_F
+
+01_real_word_video.zip.part64424509440 = 1563(3개) ~ 1615(5개)
+defects = 1616_D
+
+01_real_word_video.zip.part65498251264 = 1616(4개) ~ 1665(4개)
+defects = 1665_U
+
+01_real_word_video.zip.part66571993088 = 1666(5개) ~ 1715(2개)
+defects = 1715_L
+
+01_real_word_video.zip.part67645734912 = 1715(2개) ~ 1766(2개)
+defects = 1766_L
+
+01_real_word_video.zip.part68719476736 = 1766(2개) ~ 1812(2개)
+defects = 1812_L
+
+01_real_word_video.zip.part69793218560 = 1812(2개) ~ 1858(5개)
+defects = 1859_D
+
+01_real_word_video.zip.part70866960384 = 1859(4개) ~ 1905(4개)
+defects = 1905_U
+
+01_real_word_video.zip.part71940702208 = 1906(5개) ~ 1953(1개)
+defects = 1953_F
+
+01_real_word_video.zip.part73014444032 = 1953(3개) ~ 1998(2개)
+defects = 1998_L
+
+01_real_word_video.zip.part74088185856 = 1998(2개) ~ 2043(1개)
+defects = 2043_F
+
+01_real_word_video.zip.part75161927680 = 2043(3개) ~ 2087(5개)
+defects = 2088_D
+
+01_real_word_video.zip.part76235669504 = 2088(4개) ~ 2132(5개)
+defects = 2133_D
+
+01_real_word_video.zip.part77309411328 = 2133(4개) ~ 2178(5개)
+defects = 2179_D
+
+01_real_word_video.zip.part78383153152 = 2179(4개) ~ 2226(2개)
+defects = 2226_L
+
+01_real_word_video.zip.part79456894976 = 2226(2개) ~ 2274(4개)
+defects = 2274_U
+
+01_real_word_video.zip.part80530636800 = 2275(5개) ~ 2323(5개)
+defects = 2324_D
+
+01_real_word_video.zip.part81604378624 = 2324(4개) ~ 2374(2개)
+defects = 2374_L
+
+01_real_word_video.zip.part82678120448 = 2374(2개) ~ 2422(1개)
+defects = 2422_F
+
+01_real_word_video.zip.part83751862272 = 2422(3개) ~ 2465(5개)
+defects = 2466_D
+
+01_real_word_video.zip.part84825604096 = 2466(4개) ~ 2518(4개)
+defects = 2518_U
+
+01_real_word_video.zip.part85899345920 = 2519(5개) ~ 2572(5개)
+defects = 2573_D
+
+01_real_word_video.zip.part86973087744 = 2573(4개) ~ 2630(4개)
+defects = 2630_U
+
+01_real_word_video.zip.part88046829568 = 2631(5개) ~ 2686(5개)
+defects = 2687_D
+
+01_real_word_video.zip.part89120571392 = 2687(4개) ~ 2742(1개)
+defects = 2742_F
+
+01_real_word_video.zip.part90194313216 = 2742(3개) ~ 2793(4개)
+defects = 2793_U
+
+01_real_word_video.zip.part91268055040 = 2794(5개) ~ 2849(1개)
+defects = 2849_F
+
+01_real_word_video.zip.part92341796864 = 2849(3개) ~ 2909(2개)
+defects = 2909_L
+
+01_real_word_video.zip.part93415538688 = 2909(2개) ~ 2967(4개)
+defects = 2967_U
+
+01_real_word_video.zip.part94489280512 = 2968(1개) ~ 3000(5개)
+defects = NONE
+
+01_real_word_video.zip.part94489280512 = 0001(5개) ~ 0019(4개)
+defects = 0019_U
+
+01_real_word_video.zip.part95563022336 = 0020(5개) ~ 0066(1개)
+defects = 0066_F
+
+01_real_word_video.zip.part96636764160 = 0066(3개) ~ 0115(2개)
+defects = 0115_L
+
+01_real_word_video.zip.part97710505984 = 0115(2개) ~ 0164(3개)
+defects = 0164_R
+
+01_real_word_video.zip.part98784247808 = 0164(1개) ~ 0214(3개)
+defects = 0214_R
+
+01_real_word_video.zip.part99857989632 = 0214(1개) ~ 0266(3개)
+defects = 0266_R
+
+01_real_word_video.zip.part100931731456 = 0266(1개) ~ 0315(4개)
+defects = 0315_U
+
+01_real_word_video.zip.part102005473280 = 0316(5개) ~ 0365(4개)
+defects = 0365_U
+
+01_real_word_video.zip.part103079215104 = 0366(5개) ~ 0415(3개)
+defects = 0415_R
+
+01_real_word_video.zip.part104152956928 = 0415(1개) ~ 0469(3개)
+defects = 0469_R
+
+01_real_word_video.zip.part105226698752 = 0469(1개) ~ 0524(3개)
+defects = 0524_R
+
+01_real_word_video.zip.part106300440576 = 0524(1개) ~ 0571(2개)
+defects = 0571_L
+=============================================================================
+
+
